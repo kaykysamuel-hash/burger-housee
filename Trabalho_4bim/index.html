@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lanchonete Burger House</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+    <span class="sr-only">Burger House - Lanchonete Artesanal</span>
+</header>
+
+<section class="main">
+    <h2>Cardápio</h2>
+    <div class="produtos" id="grid-produtos">
+        </div>
+
+    <h2>Seu Pedido</h2>
+    <div class="area-pedido" id="area-carrinho">
+        <ul id="lista-pedido">
+            <li style="color: #ddd; font-style: italic; text-align: center;">Seu carrinho está vazio...</li>
+        </ul>
+
+        <div class="cupom-wrapper">
+            <input type="text" id="input-cupom" placeholder="Cupom (Ex: BURGER10)">
+            <button onclick="aplicarCupom()" class="btn-cupom">Aplicar</button>
+        </div>
+        <div id="msg-cupom" class="msg-feedback"></div>
+
+        <div class="linha-total">
+            <div class="info-valores">
+                <span>Subtotal:</span>
+                <span id="valor-subtotal">R$ 0,00</span>
+            </div>
+            <div class="info-valores desconto hidden" id="linha-desconto">
+                <span>Desconto (10%):</span>
+                <span id="valor-desconto">- R$ 0,00</span>
+            </div>
+            <div class="info-valores total-destaque">
+                <span class="total-texto">Total Final:</span>
+                <span class="valor-total" id="valor-total">R$ 0,00</span>
+            </div>
+        </div>
+
+        <div class="acoes-pedido">
+            <button class="btn-acao btn-limpar" onclick="limparCarrinho()">Limpar</button>
+            <button class="btn-acao btn-finalizar" onclick="finalizarPedido()">Finalizar Pedido</button>
+        </div>
+    </div>
+</section>
+
+<footer class="rodape">
+    <div class="conteudo-rodape">
+        <div class="info-sobre">
+            <h3>Sobre a Burger House</h3>
+            <p>Desde 2023 servindo hambúrgueres artesanais feitos com paixão. Usamos ingredientes frescos e receitas exclusivas para garantir o melhor sabor da sua vida.</p>
+        </div>
+        <div class="separador"></div>
+        <div class="info-contato">
+            <h3>Fale Conosco</h3>
+            <p>📞 <strong>Whatsapp:</strong> (11) 99999-9999</p>
+            <p>📍 Rua das Delícias, 123 - Centro</p>
+            <p>⏰ Aberto de Terça a Domingo, das 18h às 23h</p>
+        </div>
+    </div>
+    <div class="copyright">
+        &copy; 2026 Burger House. Todos os direitos reservados.
+    </div>
+</footer>
+
+<div id="modal-checkout" class="modal-overlay hidden">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Finalizar Pedido</h2>
+            <button class="btn-fechar" onclick="fecharModal()">&times;</button>
+        </div>
+        
+        <div class="modal-body">
+            <div id="resumo-carrinho" class="resumo-lista"></div>
+            
+            <div class="total-final">
+                Total a Pagar: <span id="total-modal">R$ 0,00</span>
+            </div>
+
+            <form id="form-checkout" onsubmit="enviarPedidoWhatsApp(event)">
+                <div class="campo-form">
+                    <label for="cliente-nome">Seu Nome:</label>
+                    <input type="text" id="cliente-nome" placeholder="Digite seu nome" required>
+                </div>
+
+                <div class="campo-form">
+                    <label for="cliente-endereco">Endereço de Entrega:</label>
+                    <input type="text" id="cliente-endereco" placeholder="Rua, Número, Bairro" required>
+                </div>
+
+                <div class="campo-form">
+                    <label for="cliente-pagamento">Forma de Pagamento:</label>
+                    <select id="cliente-pagamento">
+                        <option value="Pix">Pix</option>
+                        <option value="Dinheiro">Dinheiro</option>
+                        <option value="Cartão de Crédito">Cartão de Crédito</option>
+                        <option value="Cartão de Débito">Cartão de Débito</option>
+                    </select>
+                </div>
+
+                <div class="campo-form">
+                    <label for="cliente-obs">Observações (Opcional):</label>
+                    <textarea id="cliente-obs" rows="3" placeholder="Ex: Sem cebola, maionese à parte, troco para 50..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-confirmar">CONFIRMAR PEDIDO (WhatsApp)</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<a href="#area-carrinho" class="btn-carrinho-flutuante oculto" id="btn-carrinho-float">
+    🛒
+    <span class="contador-badge" id="carrinho-contador">0</span>
+</a>
+
+<script src="script.js"></script>
+
+</body>
+</html>
